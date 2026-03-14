@@ -20,8 +20,8 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/how-it-works}">How It Works</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/courses/new">Add Course</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/courses}">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/courses/new}">Add Course</a></li>
                 </ul>
             </div>
         </div>
@@ -36,13 +36,13 @@
                     <h1 class="display-5 fw-bold">Learning Platform</h1>
                     <p class="lead text-muted">Employee Training &amp; Development Portal</p>
                     <p class="mb-4">
-                        Learning Platform helps organizations share workplace training in one simple place.
-                        Employees can review available learning opportunities, and instructors can build
-                        training that supports onboarding, compliance, and professional growth.
+                        Learning Platform gives organizations a simple place to manage internal training.
+                        Employees can browse workplace learning, and managers or trainers can share courses
+                        that support onboarding, compliance, product knowledge, and professional development.
                     </p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a class="btn btn-primary btn-lg" href="/courses">Browse Courses</a>
-                        <a class="btn btn-outline-primary btn-lg" href="/courses/new">Add a Course</a>
+                        <a class="btn btn-primary btn-lg" th:href="@{/courses}">Browse Courses</a>
+                        <a class="btn btn-outline-primary btn-lg" th:href="@{/courses/new}">Add a Course</a>
                     </div>
                 </div>
             </div>
@@ -56,15 +56,15 @@
                     <article class="card h-100 shadow-sm">
                         <div class="card-body">
                             <h2 class="h4">Workplace Onboarding</h2>
-                            <p class="mb-0">Support new employees with structured learning that introduces company policies, expectations, and tools.</p>
+                            <p class="mb-0">Help new employees get started with clear training on company expectations, policies, and internal tools.</p>
                         </div>
                     </article>
                 </div>
                 <div class="col-md-4">
                     <article class="card h-100 shadow-sm">
                         <div class="card-body">
-                            <h2 class="h4">Ongoing Development</h2>
-                            <p class="mb-0">Provide staff with opportunities to improve product knowledge, leadership skills, and job performance.</p>
+                            <h2 class="h4">Workplace Development</h2>
+                            <p class="mb-0">Support employees with practical training in product knowledge, processes, communication, and job performance.</p>
                         </div>
                     </article>
                 </div>
@@ -72,7 +72,7 @@
                     <article class="card h-100 shadow-sm">
                         <div class="card-body">
                             <h2 class="h4">Centralized Training</h2>
-                            <p class="mb-0">Keep internal learning organized so employees can quickly find the courses that matter to their role.</p>
+                            <p class="mb-0">Keep internal courses organized so employees can quickly find the training that fits their role and responsibilities.</p>
                         </div>
                     </article>
                 </div>

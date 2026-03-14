@@ -20,8 +20,8 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/how-it-works}">How It Works</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/courses/new">Add Course</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/courses}">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/courses/new}">Add Course</a></li>
                 </ul>
             </div>
         </div>
@@ -34,17 +34,17 @@
             <div class="col-lg-8">
                 <h1 class="mb-4">How It Works</h1>
                 <p>
-                    Learning Platform is designed to keep employee training simple. Instructors create courses
-                    so that important workplace knowledge can be shared with employees in one place.
+                    Learning Platform is designed to keep internal training simple. Managers, trainers,
+                    and instructors create courses so important workplace knowledge can be shared in one place.
                 </p>
                 <p>
-                    Learners browse the available training and choose the courses that match their role,
-                    responsibilities, or development goals. This makes it easier for employees to stay current
-                    with internal learning opportunities.
+                    Employees browse the available training and choose the courses that match their role,
+                    responsibilities, or development goals. This makes it easier for staff to find the
+                    learning they need for onboarding, compliance, and everyday work.
                 </p>
                 <p class="mb-0">
-                    Future versions of the platform may expand to include features such as assignments,
-                    progress tracking, and grading to support a more complete learning experience.
+                    Future versions of the platform may expand to include features such as progress tracking,
+                    assessments, and reporting to support a more complete workplace learning experience.
                 </p>
             </div>
         </section>
