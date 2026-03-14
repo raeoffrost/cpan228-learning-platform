@@ -38,9 +38,51 @@
             </p>
         </section>
 
+        <section class="mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form th:action="@{/courses}" method="get" class="row g-3 align-items-end">
+                        <div class="col-md-4">
+                            <label for="category" class="form-label">Category</label>
+                            <select id="category" name="category" class="form-select">
+                                <option value="">All Categories</option>
+                                <option th:each="category : ${categories}"
+                                        th:value="${category}"
+                                        th:text="${category}"
+                                        th:selected="${category.name() == selectedCategory}">Category</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="difficulty" class="form-label">Difficulty</label>
+                            <select id="difficulty" name="difficulty" class="form-select">
+                                <option value="">All Difficulty Levels</option>
+                                <option th:each="level : ${difficultyLevels}"
+                                        th:value="${level}"
+                                        th:text="${level}"
+                                        th:selected="${level.name() == selectedDifficulty}">Difficulty</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="sort" class="form-label">Sort By</label>
+                            <select id="sort" name="sort" class="form-select">
+                                <option value="titleAsc" th:selected="${selectedSort == 'titleAsc'}">Title (A-Z)</option>
+                                <option value="titleDesc" th:selected="${selectedSort == 'titleDesc'}">Title (Z-A)</option>
+                                <option value="durationAsc" th:selected="${selectedSort == 'durationAsc'}">Duration (Low to High)</option>
+                                <option value="durationDesc" th:selected="${selectedSort == 'durationDesc'}">Duration (High to Low)</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            <a class="btn btn-link" th:href="@{/courses}">Reset Filters</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <section th:if="${#lists.isEmpty(courses)}">
             <div class="alert alert-info" role="alert">
-                No courses are available yet. Please check back later.
+                No training courses match the selected filters.
             </div>
         </section>
 
@@ -74,6 +116,30 @@
                 </div>
             </div>
         </section>
+
+        <nav class="mt-4" th:if="${totalPages > 1}" aria-label="Course catalog pages">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${currentPage == 0} ? ' disabled'">
+                    <a class="page-link"
+                       th:href="@{/courses(page=${currentPage > 0 ? currentPage - 1 : 0}, category=${selectedCategory}, difficulty=${selectedDifficulty}, sort=${selectedSort})}">
+                        Previous
+                    </a>
+                </li>
+                <li class="page-item"
+                    th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${pageNumber == currentPage} ? ' active'">
+                    <a class="page-link"
+                       th:href="@{/courses(page=${pageNumber}, category=${selectedCategory}, difficulty=${selectedDifficulty}, sort=${selectedSort})}"
+                       th:text="${pageNumber + 1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage >= totalPages - 1} ? ' disabled'">
+                    <a class="page-link"
+                       th:href="@{/courses(page=${currentPage < totalPages - 1 ? currentPage + 1 : totalPages - 1}, category=${selectedCategory}, difficulty=${selectedDifficulty}, sort=${selectedSort})}">
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </main>
 

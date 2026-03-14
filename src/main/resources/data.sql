@@ -5,3 +5,5 @@ INSERT INTO courses (id, title, description, category, difficulty, duration_hour
 (4, 'Product Knowledge for Sales and Support', 'Provides staff with a clear overview of product features, customer benefits, and common questions raised by clients.', 'PRODUCT_TRAINING', 'INTERMEDIATE', 5, '2026-01-18 11:00:00'),
 (5, 'Data Privacy and Compliance', 'Reviews employee responsibilities for handling private data, following company standards, and meeting compliance requirements.', 'COMPLIANCE', 'INTERMEDIATE', 5, '2026-01-20 09:45:00'),
 (6, 'Intro to Internal Web Tools', 'Introduces the internal web systems employees use for training, shared resources, and day-to-day workplace tasks.', 'PROGRAMMING', 'BEGINNER', 7, '2026-01-22 13:30:00');
+
+ALTER TABLE courses ALTER COLUMN id RESTART WITH 7;
