@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Course | Learning Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">Learning Platform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/how-it-works}">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/courses}">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/courses/new}">Add Course</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <section class="mb-4">
+                    <h1 class="mb-3">Add Training Course</h1>
+                    <p class="text-muted mb-0">
+                        Create a new workplace training course for onboarding, compliance,
+                        product knowledge, or internal development.
+                    </p>
+                </section>
+
+                <section class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form th:action="@{/courses}" th:object="${course}" method="post">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" id="title" class="form-control" th:field="*{title}">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                                    Title error
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea id="description" class="form-control" th:field="*{description}" rows="4"></textarea>
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                                    Description error
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select id="category" class="form-select" th:field="*{category}">
+                                        <option value="">Select a category</option>
+                                        <option th:each="category : ${categories}"
+                                                th:value="${category}"
+                                                th:text="${category}">Category</option>
+                                    </select>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">
+                                        Category error
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="difficulty" class="form-label">Difficulty</label>
+                                    <select id="difficulty" class="form-select" th:field="*{difficulty}">
+                                        <option value="">Select a difficulty level</option>
+                                        <option th:each="level : ${difficultyLevels}"
+                                                th:value="${level}"
+                                                th:text="${level}">Difficulty</option>
+                                    </select>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('difficulty')}" th:errors="*{difficulty}">
+                                        Difficulty error
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="durationHours" class="form-label">Duration (Hours)</label>
+                                <input type="number" id="durationHours" class="form-control" th:field="*{durationHours}" min="1" max="100">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('durationHours')}" th:errors="*{durationHours}">
+                                    Duration error
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Save Course</button>
+                                <a class="btn btn-outline-secondary" th:href="@{/courses}">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
