@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Course | Learning Platform</title>
+    <title>Add Course | TrainHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body class="bg-light">
+<body class="portal-body">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/}">Learning Platform</a>
+    <nav class="navbar navbar-expand-lg navbar-light site-nav">
+        <div class="container-xl">
+            <a class="site-brand" th:href="@{/}">
+                <span class="brand-mark">TH</span>
+                <span class="brand-copy">
+                    TrainHub
+                    <small>Employee Training &amp; Development Portal</small>
+                </span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
                     aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,84 +35,117 @@
     </nav>
 </header>
 
-<main class="py-5">
-    <div class="container">
+<main class="page-shell">
+    <div class="container-xl">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <section class="mb-4">
-                    <h1 class="mb-3">Add Training Course</h1>
-                    <p class="text-muted mb-0">
+            <div class="col-xl-10">
+                <section class="page-intro">
+                    <span class="page-chip mb-3">Create Training</span>
+                    <h1 class="display-4 mb-3">Add Training Course</h1>
+                    <p class="mb-0">
                         Create a new workplace training course for onboarding, compliance,
                         product knowledge, or internal development.
                     </p>
                 </section>
 
-                <section class="card shadow-sm">
-                    <div class="card-body p-4">
-                        <form th:action="@{/courses}" th:object="${course}" method="post">
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Title</label>
-                                <input type="text" id="title" class="form-control" th:field="*{title}">
-                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-                                    Title error
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <section class="content-panel">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                                <div>
+                                    <h2 class="h4 mb-1">New Course Details</h2>
+                                    <p class="text-secondary mb-0">Fill in the form below to publish a new internal training course.</p>
                                 </div>
+                                <span class="page-chip">Employee Training Portal</span>
                             </div>
-
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea id="description" class="form-control" th:field="*{description}" rows="4"></textarea>
-                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
-                                    Description error
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="category" class="form-label">Category</label>
-                                    <select id="category" class="form-select" th:field="*{category}">
-                                        <option value="">Select a category</option>
-                                        <option th:each="category : ${categories}"
-                                                th:value="${category}"
-                                                th:text="${category}">Category</option>
-                                    </select>
-                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">
-                                        Category error
+                            <form th:action="@{/courses}" th:object="${course}" method="post">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" id="title" class="form-control" th:field="*{title}" placeholder="Enter a course title">
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                                        Title error
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="difficulty" class="form-label">Difficulty</label>
-                                    <select id="difficulty" class="form-select" th:field="*{difficulty}">
-                                        <option value="">Select a difficulty level</option>
-                                        <option th:each="level : ${difficultyLevels}"
-                                                th:value="${level}"
-                                                th:text="${level}">Difficulty</option>
-                                    </select>
-                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('difficulty')}" th:errors="*{difficulty}">
-                                        Difficulty error
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea id="description" class="form-control" th:field="*{description}" rows="5" placeholder="Describe the training purpose and what employees will learn"></textarea>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                                        Description error
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="mb-4">
-                                <label for="durationHours" class="form-label">Duration (Hours)</label>
-                                <input type="number" id="durationHours" class="form-control" th:field="*{durationHours}" min="1" max="100">
-                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('durationHours')}" th:errors="*{durationHours}">
-                                    Duration error
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="category" class="form-label">Category</label>
+                                        <select id="category" class="form-select" th:field="*{category}">
+                                            <option value="">Select a category</option>
+                                            <option th:each="category : ${categories}"
+                                                    th:value="${category}"
+                                                    th:text="${category}">Category</option>
+                                        </select>
+                                        <div class="text-danger small mt-1" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">
+                                            Category error
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="difficulty" class="form-label">Difficulty</label>
+                                        <select id="difficulty" class="form-select" th:field="*{difficulty}">
+                                            <option value="">Select a difficulty level</option>
+                                            <option th:each="level : ${difficultyLevels}"
+                                                    th:value="${level}"
+                                                    th:text="${level}">Difficulty</option>
+                                        </select>
+                                        <div class="text-danger small mt-1" th:if="${#fields.hasErrors('difficulty')}" th:errors="*{difficulty}">
+                                            Difficulty error
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-primary">Save Course</button>
-                                <a class="btn btn-outline-secondary" th:href="@{/courses}">Cancel</a>
-                            </div>
-                        </form>
+                                <div class="mb-4">
+                                    <label for="durationHours" class="form-label">Duration (Hours)</label>
+                                    <input type="number" id="durationHours" class="form-control" th:field="*{durationHours}" min="1" max="100" placeholder="Enter total hours">
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('durationHours')}" th:errors="*{durationHours}">
+                                        Duration error
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 flex-wrap form-actions">
+                                    <button type="submit" class="btn btn-primary">Save Course</button>
+                                    <a class="btn btn-outline-secondary" th:href="@{/courses}">Cancel</a>
+                                </div>
+                            </form>
+                        </section>
                     </div>
-                </section>
+                    <div class="col-lg-4">
+                        <aside class="info-panel mb-4">
+                            <h2>Course Planning Notes</h2>
+                            <ul class="support-list">
+                                <li>Use a short, clear title that employees can recognize quickly.</li>
+                                <li>Keep the description focused on the workplace outcome of the training.</li>
+                                <li>Select the category and difficulty that best match the intended audience.</li>
+                            </ul>
+                        </aside>
+                        <aside class="info-panel">
+                            <h2>Recommended Uses</h2>
+                            <p class="mb-0">
+                                This form works well for onboarding modules, safety training, compliance refreshers,
+                                product knowledge sessions, and internal tools training.
+                            </p>
+                        </aside>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </main>
+
+<footer class="site-footer">
+    <div class="container-xl">
+        <p class="mb-0 text-center">TrainHub | Employee Training &amp; Development Portal</p>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

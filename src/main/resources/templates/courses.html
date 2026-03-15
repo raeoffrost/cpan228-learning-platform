@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses | Learning Platform</title>
+    <title>Courses | TrainHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body class="bg-light">
+<body class="portal-body">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/}">Learning Platform</a>
+    <nav class="navbar navbar-expand-lg navbar-light site-nav">
+        <div class="container-xl">
+            <a class="site-brand" th:href="@{/}">
+                <span class="brand-mark">TH</span>
+                <span class="brand-copy">
+                    TrainHub
+                    <small>Employee Training &amp; Development Portal</small>
+                </span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
                     aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,91 +35,99 @@
     </nav>
 </header>
 
-<main class="py-5">
-    <div class="container">
-        <section class="mb-4">
-            <h1 class="mb-3">Training Catalog</h1>
-            <p class="text-muted mb-0">
-                Browse the available workplace training courses for onboarding, compliance,
-                product knowledge, and employee development.
-            </p>
+<main class="page-shell">
+    <div class="container-xl">
+        <section class="page-intro d-lg-flex justify-content-between align-items-end gap-4">
+            <div>
+                <span class="page-chip mb-3">Staff Training Catalog</span>
+                <h1 class="display-4 mb-3">Training Catalog</h1>
+                <p class="mb-0">
+                    Browse internal workplace training for onboarding, compliance, product knowledge, and employee development.
+                </p>
+            </div>
+            <div class="mt-3 mt-lg-0">
+                <a class="btn btn-primary btn-lg" th:href="@{/courses/new}">Add Training Course</a>
+            </div>
         </section>
 
         <section class="mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <form th:action="@{/courses}" method="get" class="row g-3 align-items-end">
-                        <div class="col-md-4">
-                            <label for="category" class="form-label">Category</label>
-                            <select id="category" name="category" class="form-select">
-                                <option value="">All Categories</option>
-                                <option th:each="category : ${categories}"
-                                        th:value="${category}"
-                                        th:text="${category}"
-                                        th:selected="${category.name() == selectedCategory}">Category</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="difficulty" class="form-label">Difficulty</label>
-                            <select id="difficulty" name="difficulty" class="form-select">
-                                <option value="">All Difficulty Levels</option>
-                                <option th:each="level : ${difficultyLevels}"
-                                        th:value="${level}"
-                                        th:text="${level}"
-                                        th:selected="${level.name() == selectedDifficulty}">Difficulty</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="sort" class="form-label">Sort By</label>
-                            <select id="sort" name="sort" class="form-select">
-                                <option value="titleAsc" th:selected="${selectedSort == 'titleAsc'}">Title (A-Z)</option>
-                                <option value="titleDesc" th:selected="${selectedSort == 'titleDesc'}">Title (Z-A)</option>
-                                <option value="durationAsc" th:selected="${selectedSort == 'durationAsc'}">Duration (Low to High)</option>
-                                <option value="durationDesc" th:selected="${selectedSort == 'durationDesc'}">Duration (High to Low)</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Apply Filters</button>
-                            <a class="btn btn-link" th:href="@{/courses}">Reset Filters</a>
-                        </div>
-                    </form>
-                </div>
+            <div class="content-panel">
+                <form th:action="@{/courses}" method="get" class="row g-3 align-items-end catalog-toolbar">
+                    <div class="col-md-4">
+                        <label for="category" class="form-label">Category</label>
+                        <select id="category" name="category" class="form-select">
+                            <option value="">All Categories</option>
+                            <option th:each="category : ${categories}"
+                                    th:value="${category}"
+                                    th:text="${category}"
+                                    th:selected="${category.name() == selectedCategory}">Category</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="difficulty" class="form-label">Difficulty</label>
+                        <select id="difficulty" name="difficulty" class="form-select">
+                            <option value="">All Difficulty Levels</option>
+                            <option th:each="level : ${difficultyLevels}"
+                                    th:value="${level}"
+                                    th:text="${level}"
+                                    th:selected="${level.name() == selectedDifficulty}">Difficulty</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="sort" class="form-label">Sort By</label>
+                        <select id="sort" name="sort" class="form-select">
+                            <option value="titleAsc" th:selected="${selectedSort == 'titleAsc'}">Title (A-Z)</option>
+                            <option value="titleDesc" th:selected="${selectedSort == 'titleDesc'}">Title (Z-A)</option>
+                            <option value="durationAsc" th:selected="${selectedSort == 'durationAsc'}">Duration (Low to High)</option>
+                            <option value="durationDesc" th:selected="${selectedSort == 'durationDesc'}">Duration (High to Low)</option>
+                        </select>
+                    </div>
+                    <div class="col-12 d-flex flex-wrap gap-3 filter-actions">
+                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                        <a class="btn btn-outline-secondary" th:href="@{/courses}">Reset Filters</a>
+                    </div>
+                </form>
             </div>
         </section>
 
         <section th:if="${#lists.isEmpty(courses)}">
-            <div class="alert alert-info" role="alert">
-                No training courses match the selected filters.
+            <div class="content-panel empty-state">
+                <span class="page-chip mb-3">No Matching Courses</span>
+                <h2>No training courses match the selected filters.</h2>
+                <p class="mb-0 text-secondary">
+                    Try adjusting the filter options or reset the catalog to view all available workplace training.
+                </p>
             </div>
         </section>
 
         <section th:unless="${#lists.isEmpty(courses)}">
-            <div class="card shadow-sm">
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover mb-0">
-                            <thead class="table-primary">
-                            <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Difficulty</th>
-                                <th scope="col">Duration</th>
-                                <th scope="col">Created Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="course : ${courses}">
-                                <td th:text="${course.title}">Course Title</td>
-                                <td th:text="${course.category}">Category</td>
-                                <td th:text="${course.difficulty}">Difficulty</td>
-                                <td>
-                                    <span th:text="${course.durationHours}">0</span> hours
-                                </td>
-                                <td th:text="${#temporals.format(course.createdAt, 'yyyy-MM-dd HH:mm')}">2026-01-10 09:00</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="table-panel">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0 portal-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Difficulty</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Created Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="course : ${courses}">
+                            <td>
+                                <div class="fw-semibold text-dark" th:text="${course.title}">Course Title</div>
+                                <div class="meta-text">Workplace training course</div>
+                            </td>
+                            <td th:text="${course.category}">Category</td>
+                            <td th:text="${course.difficulty}">Difficulty</td>
+                            <td>
+                                <span th:text="${course.durationHours}">0</span> hours
+                            </td>
+                            <td th:text="${#temporals.format(course.createdAt, 'yyyy-MM-dd HH:mm')}">2026-01-10 09:00</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -142,6 +157,12 @@
         </nav>
     </div>
 </main>
+
+<footer class="site-footer">
+    <div class="container-xl">
+        <p class="mb-0 text-center">TrainHub | Employee Training &amp; Development Portal</p>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
